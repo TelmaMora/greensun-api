@@ -15,6 +15,10 @@ import programaRoutes from "./routes/programa.routes.js"
 import transporteRoutes from "./routes/transporte.routes.js"
 import usuarioRoutes from "./routes/user.routes.js";
 import authRoutes from "./routes/auth.routes.js"
+import prestamoCajaRoutes from "./routes/prestamo_caja.routes.js"
+import "./models/associations.js"
+import recibaRoutes from "./routes/reciba.routes.js"
+import seleccionRoutes from "./routes/seleccion.routes.js"
 
 dotenv.config();
 const app = express();
@@ -36,11 +40,14 @@ app.use("/api/programas", programaRoutes)
 app.use("/api/transportes", transporteRoutes)
 app.use("/api/usuarios", usuarioRoutes);
 app.use("/api/auth", authRoutes)
+app.use("/api/prestamos-cajas", prestamoCajaRoutes)
+app.use("/api/recibas", recibaRoutes)
 
-
+app.use("/api/selecciones", seleccionRoutes)
 
 app.listen(PORT, async () => {
   await conectarDB();
+  await import("./models/associations.js"); // 👈 ESTO
   await sequelize.sync({ alter: true });
   console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
 });

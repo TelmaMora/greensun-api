@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize"
 import { sequelize } from "../config/database.js"
 
-export const Proveedor = sequelize.define("proveedor", {
+const Proveedor = sequelize.define("proveedor", {
   id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
   codigo: { type: DataTypes.STRING, allowNull: false, unique: true },
   nombre: { type: DataTypes.STRING, allowNull: false },
@@ -11,3 +11,4 @@ export const Proveedor = sequelize.define("proveedor", {
   documentacion: { type: DataTypes.STRING },
   extension: { type: DataTypes.STRING },
 })
+export default Proveedor

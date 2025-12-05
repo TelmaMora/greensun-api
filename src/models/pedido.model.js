@@ -1,54 +1,39 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/database.js";
+import { Cliente } from "./cliente.model.js";
+import { Clasificacion } from "./clasificacion.model.js";
 
 export const Pedido = sequelize.define(
   "Pedido",
   {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    cliente: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    numero_embarque: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    clasificacion: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    fecha: {
-      type: DataTypes.DATEONLY,
-      allowNull: false,
-    },
-    cajas: {
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+
+    cliente_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: 0,
+      references: { model: "clientes", key: "id" }
     },
-    kilos: {
-      type: DataTypes.FLOAT,
-      allowNull: false,
-      defaultValue: 0,
-    },
-    tipo_caja: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    pallets: {
+
+    clasificacion_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      defaultValue: 0,
+      references: { model: "clasificaciones", key: "id" }
     },
+
+    numero_embarque: { type: DataTypes.STRING, allowNull: false },
+    fecha: { type: DataTypes.DATEONLY, allowNull: false },
+    cajas: { type: DataTypes.INTEGER, defaultValue: 0 },
+    kilos: { type: DataTypes.FLOAT, defaultValue: 0 },
+    tipo_caja: { type: DataTypes.STRING, allowNull: false },
+    pallets: { type: DataTypes.INTEGER, defaultValue: 0 }
   },
   {
     tableName: "pedidos",
-    timestamps: true,
+    underscored: true,
     paranoid: true,
-    underscored: true, // convierte createdAt -> created_at
   }
 );
+
+// RELACIONES
+Pedido.belongsTo(Cliente, { foreignKey: "cliente_id" });
+Pedido.belongsTo(Clasificacion, { foreignKey: "clasificacion_id" });

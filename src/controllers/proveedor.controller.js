@@ -1,4 +1,4 @@
-import { Proveedor } from "../models/proveedor.model.js"
+import Proveedor from "../models/proveedor.model.js"
 
 // 📥 Obtener todos
 export const getProveedores = async (req, res) => {

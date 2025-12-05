@@ -1,5 +1,5 @@
 import { Visita } from "../models/visita.model.js"
-import { Proveedor } from "../models/proveedor.model.js"
+import Proveedor from "../models/proveedor.model.js"
 
 export const getVisitas = async (req, res) => {
   try {
@@ -29,6 +29,7 @@ export const createVisita = async (req, res) => {
     const visita = await Visita.create({
       ...req.body,
       proveedor: proveedor.nombre,
+      fecha: new Date()
     })
 
     res.status(201).json(visita)

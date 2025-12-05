@@ -1,4 +1,4 @@
-import { Caja } from "../models/caja.model.js"
+import Caja from "../models/caja.model.js"
 
 // 📥 Obtener todas las cajas
 export const getCajas = async (req, res) => {

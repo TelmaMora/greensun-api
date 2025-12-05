@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize"
 import { sequelize } from "../config/database.js"
-import { Proveedor } from "./proveedor.model.js"
+import Proveedor from "./proveedor.model.js"
 
 export const Visita = sequelize.define("visita", {
   id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
